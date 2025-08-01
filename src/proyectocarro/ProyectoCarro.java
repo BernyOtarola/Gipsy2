@@ -1,7 +1,8 @@
 package proyectocarro;
 
-import vehiculoInterfaz.CarroSimulador;
+
 import javax.swing.SwingUtilities;
+import vehiculoInterfaz.CarroSimulador;
 
 /**
  * Clase principal del proyecto Simulador de Carro
