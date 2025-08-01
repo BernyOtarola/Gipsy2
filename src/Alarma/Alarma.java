@@ -8,15 +8,22 @@ package Alarma;
  *
  * @author USER
  */
-
 public class Alarma {
-    
+
     private boolean Alarma;
     private boolean bloqueoPuertas;
     private Seguridad ModoActual;
 
     public Alarma() {
-       setSeguridad(Seguridad.NORMAL);
+        setSeguridad(Seguridad.NORMAL);
+    }
+
+    public void activar() {
+        System.out.println("Alarma activada.");
+    }
+
+    public void desactivar() {
+        System.out.println("Alarma desactivada.");
     }
 
     public void activarAlarma() {
@@ -45,7 +52,7 @@ public class Alarma {
 
     public void setSeguridad(Seguridad ModoActual) {
         this.ModoActual = ModoActual;
-        
+
         switch (ModoActual) {
             case NORMAL:
                 desactivarAlarma();
@@ -58,11 +65,11 @@ public class Alarma {
                 break;
         }
     }
+
     public String Estado() {
-        return "Modo: " + ModoActual.name() +
-               " | " + ModoActual.getEstado() +
-               " | Alarma: " + (Alarma ? "Activada" : "Desactivada") +
-               " | Puertas: " + (bloqueoPuertas ? "Bloqueadas" : "Desbloqueadas");
+        return "Modo: " + ModoActual.name()
+                + " | " + ModoActual.getEstado()
+                + " | Alarma: " + (Alarma ? "Activada" : "Desactivada")
+                + " | Puertas: " + (bloqueoPuertas ? "Bloqueadas" : "Desbloqueadas");
     }
 }
-        

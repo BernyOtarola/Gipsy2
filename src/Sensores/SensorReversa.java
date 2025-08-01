@@ -10,10 +10,10 @@ package Sensores;
  */
 public class SensorReversa {
 
- private boolean frenoDeManoActivado;
+    private boolean frenoDeManoActivado;
     private boolean enReversa;
     private boolean obstaculoDetectado;
-    private boolean freno; 
+    private boolean freno;
     private boolean alarmaActiva;
     private String mensajeAlarma;
     private String ultimoMensaje;
@@ -78,6 +78,10 @@ public class SensorReversa {
         } else {
             apagarAlarma();
         }
+    }
+
+    public String detectar() {
+        return "No hay obstáculos detectados.";
     }
 
     private void emitirAlarma(String mensaje) {

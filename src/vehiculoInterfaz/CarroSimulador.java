@@ -715,9 +715,27 @@ public class CarroSimulador extends JFrame {
             int centerY = getHeight() / 2;
             int radius = Math.min(centerX, centerY) - 20;
             
-            // Dibujar el fondo del velocímetro
-            g2d.setColor(DASHBOARD_GRAY);
+            // Dibujar el fondo del velocímetro con efecto metálico
+            GradientPaint gradient = new GradientPaint(
+                centerX - radius, centerY - radius, new Color(60, 60, 60),
+                centerX + radius, centerY + radius, new Color(30, 30, 30)
+            );
+            g2d.setPaint(gradient);
             g2d.fillOval(centerX - radius, centerY - radius, radius * 2, radius * 2);
+            
+            // Borde exterior cromado
+            g2d.setColor(DASHBOARD_SILVER);
+            g2d.setStroke(new BasicStroke(3));
+            g2d.drawOval(centerX - radius, centerY - radius, radius * 2, radius * 2);
+            
+            // Zona roja de peligro (160-180 km/h)
+            g2d.setColor(new Color(255, 0, 0, 100));
+            double redZoneStart = Math.toRadians(225 - (160 * 270.0 / 180));
+            double redZoneEnd = Math.toRadians(225 - (180 * 270.0 / 180));
+            Arc2D redZone = new Arc2D.Double(centerX - radius + 5, centerY - radius + 5, 
+                (radius - 5) * 2, (radius - 5) * 2, 
+                Math.toDegrees(redZoneStart), Math.toDegrees(redZoneEnd - redZoneStart), Arc2D.PIE);
+            g2d.fill(redZone);
             
             // Dibujar las marcas
             g2d.setColor(Color.WHITE);
@@ -826,18 +844,25 @@ public class CarroSimulador extends JFrame {
         }
     }
     
-    private void applyDarkTheme() {
-        // Aplicar tema oscuro a todos los componentes
+    private void applyPremiumDarkTheme() {
+        // Aplicar tema oscuro premium con más detalles
         UIManager.put("Panel.background", DASHBOARD_BLACK);
         UIManager.put("Label.foreground", Color.WHITE);
         UIManager.put("CheckBox.background", DASHBOARD_GRAY);
         UIManager.put("CheckBox.foreground", Color.WHITE);
         UIManager.put("ComboBox.background", BUTTON_GRAY);
         UIManager.put("ComboBox.foreground", Color.WHITE);
+        UIManager.put("ComboBox.selectionBackground", ACCENT_BLUE);
         UIManager.put("Button.background", BUTTON_GRAY);
         UIManager.put("Button.foreground", Color.WHITE);
+        UIManager.put("Button.select", ACCENT_BLUE);
         UIManager.put("Slider.background", DASHBOARD_GRAY);
-        UIManager.put("Slider.foreground", LED_BLUE);
+        UIManager.put("Slider.foreground", ACCENT_BLUE);
+        UIManager.put("TitledBorder.titleColor", Color.WHITE);
+        UIManager.put("ProgressBar.background", DASHBOARD_GRAY);
+        UIManager.put("ProgressBar.foreground", ACCENT_BLUE);
+        UIManager.put("ProgressBar.selectionBackground", Color.WHITE);
+        UIManager.put("ProgressBar.selectionForeground", Color.BLACK);
     }
     
     private void setupEventListeners() {
